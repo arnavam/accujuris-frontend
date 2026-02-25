@@ -298,12 +298,24 @@ export default function LandingPage() {
 
                         <div className="lp-about-card text-center">
                             <h3 className="lp-about-title mb-8">Leadership</h3>
-                            <div className="lp-avatar">G</div>
-                            <h4 style={{ fontSize: '1.25rem', color: 'var(--lp-primary)', marginBottom: '0.5rem' }}>Gouri V B</h4>
-                            <p style={{ color: 'var(--lp-text-muted)', marginBottom: '0.5rem' }}>Founder & CEO</p>
-                            <p style={{ fontSize: '0.875rem', color: 'var(--lp-text-muted)' }}>
-                                Leading AccuJuris's mission to revolutionize legal translation in India through forensic linguistics and AI.
-                            </p>
+                            <div style={{ display: 'flex', gap: '3rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="lp-avatar">G</div>
+                                    <h4 style={{ fontSize: '1.25rem', color: 'var(--lp-primary)', marginBottom: '0.5rem' }}>Gouri V B</h4>
+                                    <p style={{ color: 'var(--lp-text-muted)', marginBottom: '0.5rem' }}>Founder & CEO</p>
+                                    <p style={{ fontSize: '0.875rem', color: 'var(--lp-text-muted)', maxWidth: '16rem' }}>
+                                        Leading AccuJuris's mission to revolutionize legal translation in India through forensic linguistics and AI.
+                                    </p>
+                                </div>
+                                <div style={{ textAlign: 'center' }}>
+                                    <div className="lp-avatar">A</div>
+                                    <h4 style={{ fontSize: '1.25rem', color: 'var(--lp-primary)', marginBottom: '0.5rem' }}>Arnav Jagadeesh</h4>
+                                    <p style={{ color: 'var(--lp-text-muted)', marginBottom: '0.5rem' }}>CTO</p>
+                                    <p style={{ fontSize: '0.875rem', color: 'var(--lp-text-muted)', maxWidth: '16rem' }}>
+                                        Architecting AccuJuris's technology platform, driving AI innovation and scalable infrastructure.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
