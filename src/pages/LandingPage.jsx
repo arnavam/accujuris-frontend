@@ -1,290 +1,409 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, CheckCircle, ArrowRight, User, Globe, FileText, Lock, Users } from 'lucide-react';
+import { ArrowRight, CheckCircle, Globe, Lock, Zap } from 'lucide-react';
+import '../styles/LandingPage.css';
 
-const LandingPage = () => {
+/**
+ * AccuJuris Website - Modern Institutional Design
+ * Design Philosophy: Trust, Precision, India-Centric Accessibility
+ * Color Palette: Deep Navy (#1A2B4D) + Warm Amber (#FFB800)
+ * Typography: Poppins (headings) + Inter (body)
+ */
+
+export default function LandingPage() {
+    const [activeTab, setActiveTab] = useState("problem");
+
     return (
-        <div style={{ backgroundColor: 'var(--background-color)', minHeight: '100vh', display: 'flex', flexDirection: 'column', fontFamily: 'var(--font-family)' }}>
-
-            {/* Navigation (Sticky Header) */}
-            <nav style={{
-                padding: '1rem 2rem',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                backdropFilter: 'blur(10px)',
-                position: 'sticky',
-                top: 0,
-                zIndex: 50,
-                borderBottom: '1px solid var(--border-color)',
-                boxShadow: 'var(--shadow)'
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontWeight: 800, fontSize: '1.75rem', color: 'var(--primary-color)' }}>
-                    <div style={{
-                        backgroundColor: 'var(--primary-color)',
-                        color: 'white',
-                        width: '40px',
-                        height: '40px',
-                        borderRadius: '0.75rem',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontWeight: 900
-                    }}>
-                        A
+        <div className="lp-wrapper">
+            {/* Navigation */}
+            <nav className="lp-nav">
+                <div className="lp-container">
+                    <div className="lp-logo">
+                        <div className="lp-logo-icon">A</div>
+                        <span className="lp-logo-text">AccuJuris</span>
                     </div>
-                    <span>AccuJuris</span>
-                </div>
 
-                <div style={{ display: 'flex', gap: '2rem', fontWeight: 500, color: 'var(--text-color)' }} className="nav-links">
-                    <a href="#problem" style={{ transition: 'color 0.2s', ':hover': { color: 'var(--primary-color)' } }}>Problem</a>
-                    <a href="#solution" style={{ transition: 'color 0.2s' }}>Solution</a>
-                    <a href="#features" style={{ transition: 'color 0.2s' }}>Features</a>
-                    <a href="#about" style={{ transition: 'color 0.2s' }}>About</a>
-                    <a href="#contact" style={{ transition: 'color 0.2s' }}>Contact</a>
-                </div>
+                    <div className="lp-nav-links">
+                        <a href="#problem">Problem</a>
+                        <a href="#solution">Solution</a>
+                        <a href="#features">Features</a>
+                        <a href="#about">About</a>
+                        <a href="#contact">Contact</a>
+                    </div>
 
-                <div style={{ display: 'flex', gap: '1rem' }}>
-                    <Link to="/login" className="btn btn-accent" style={{ padding: '0.6rem 1.5rem', borderRadius: '0.5rem', fontWeight: 600 }}>
-                        Login
-                    </Link>
+                    <div className="lp-nav-actions">
+                        <Link to="/login" className="lp-btn lp-btn-sm lp-btn-outline" style={{ display: 'none' }}>
+                            Login
+                        </Link>
+                        <Link to="/login" className="lp-btn lp-btn-sm lp-btn-accent">
+                            Try Demo
+                        </Link>
+                    </div>
                 </div>
             </nav>
 
             {/* Hero Section */}
-            <header style={{
-                padding: '8rem 2rem',
-                background: 'linear-gradient(135deg, #f0f4ff 0%, #ffffff 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                position: 'relative',
-                overflow: 'hidden'
-            }}>
-                <div className="container" style={{ display: 'flex', gap: '4rem', alignItems: 'center', position: 'relative', zIndex: 1 }}>
-                    <div style={{ flex: 1 }}>
-                        <h1 style={{ fontSize: '4rem', lineHeight: 1.1, fontWeight: 800, color: 'var(--primary-color)', marginBottom: '1.5rem', letterSpacing: '-0.02em', fontFamily: 'Poppins, sans-serif' }}>
-                            Accountability Assured Legal Translation
+            <section className="lp-hero py-20 md:py-32">
+                <div className="lp-hero-pattern"></div>
+                <div className="lp-container">
+                    <div className="lp-hero-content">
+                        <h1 className="lp-hero-title">
+                            Accountability Assured Legal Translation for India
                         </h1>
-                        <p style={{ fontSize: '1.25rem', color: '#475569', marginBottom: '2.5rem', lineHeight: 1.6 }}>
-                            India's first AI-powered platform tailored specifically for precise legal translation and forensic linguistics, empowering firms to confidently manage and verify multilingual case files.
+                        <p className="lp-hero-subtitle">
+                            Bridging the linguistic divide in the Indian justice system with forensic linguistics and AI-powered precision. Ensuring every legal document is translated with accountability, accuracy, and cultural sensitivity.
                         </p>
-                        <div style={{ display: 'flex', gap: '1rem' }}>
-                            <Link to="/login" className="btn btn-accent" style={{ padding: '1rem 2rem', fontSize: '1.125rem', borderRadius: '0.5rem', fontWeight: 600 }}>
-                                Login
+
+                        <div className="lp-hero-actions">
+                            <Link to="/login" className="lp-btn lp-btn-lg lp-btn-accent">
+                                Try Demo <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
                             </Link>
-                            <a href="#features" className="btn btn-outline" style={{ padding: '1rem 2rem', fontSize: '1.125rem', borderRadius: '0.5rem', fontWeight: 600 }}>
-                                Learn More
+                            <a href="#contact" className="lp-btn lp-btn-lg lp-btn-outline-inverse">
+                                Request Access
                             </a>
                         </div>
-                    </div>
-                    <div style={{ flex: 1, position: 'relative' }}>
-                        {/* Abstract visual representation matching reference */}
-                        <div style={{
-                            width: '100%',
-                            height: '500px',
-                            backgroundColor: 'white',
-                            borderRadius: '1.5rem',
-                            boxShadow: 'var(--shadow-lg)',
-                            padding: '2rem',
-                            position: 'relative'
-                        }}>
-                            <div style={{ width: '80%', height: '20px', backgroundColor: '#e2e8f0', borderRadius: '10px', marginBottom: '2rem' }}></div>
-                            <div style={{ width: '100%', height: '40px', backgroundColor: '#f1f5f9', borderRadius: '8px', marginBottom: '1rem' }}></div>
-                            <div style={{ width: '90%', height: '40px', backgroundColor: '#f1f5f9', borderRadius: '8px', marginBottom: '1rem' }}></div>
-                            <div style={{ width: '95%', height: '40px', backgroundColor: '#f1f5f9', borderRadius: '8px', marginBottom: '1rem' }}></div>
-                            <div style={{ width: '85%', height: '40px', backgroundColor: '#f1f5f9', borderRadius: '8px', marginBottom: '2rem' }}></div>
 
-                            <div style={{ display: 'flex', gap: '1rem' }}>
-                                <div style={{ width: '120px', height: '120px', backgroundColor: '#eff6ff', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                    <FileText size={48} color="var(--primary-color)" opacity={0.5} />
-                                </div>
-                                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '1rem' }}>
-                                    <div style={{ width: '100%', height: '20px', backgroundColor: '#e2e8f0', borderRadius: '10px' }}></div>
-                                    <div style={{ width: '70%', height: '20px', backgroundColor: '#e2e8f0', borderRadius: '10px' }}></div>
-                                </div>
+                        <div className="lp-hero-trust">
+                            <p>Trusted by legal professionals across India</p>
+                            <div className="lp-hero-trust-flex">
+                                <div>🏛️ Law Firms</div>
+                                <div>⚖️ Advocates</div>
+                                <div>📋 Government</div>
+                                <div>🔬 Researchers</div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            {/* Problem & Solution Sections */}
-            <section id="problem" style={{ padding: '6rem 2rem', backgroundColor: 'white' }}>
-                <div className="container" style={{ textAlign: 'center', maxWidth: '800px' }}>
-                    <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--primary-color)', marginBottom: '1.5rem', fontFamily: 'Poppins, sans-serif' }}>The Language Barrier in Law</h2>
-                    <p style={{ fontSize: '1.125rem', color: '#64748b', lineHeight: 1.7, marginBottom: '3rem' }}>
-                        In India's diverse linguistic landscape, accurate legal translation isn't just a convenience—it's a necessity for justice. Ambiguities or errors in converting vernacular documents into English can alter the course of a trial.
-                    </p>
-                </div>
-            </section>
-
-            <section id="solution" style={{ padding: '6rem 2rem', backgroundColor: 'var(--surface-color)' }}>
-                <div className="container">
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
-                        <div style={{
-                            backgroundColor: 'white',
-                            padding: '3rem',
-                            borderRadius: '1.5rem',
-                            boxShadow: 'var(--shadow)'
-                        }}>
-                            <Globe size={48} color="var(--accent-color)" style={{ marginBottom: '1.5rem' }} />
-                            <h3 style={{ fontSize: '1.75rem', fontWeight: 700, marginBottom: '1rem', color: 'var(--text-color)' }}>Our Solution</h3>
-                            <p style={{ color: '#64748b', lineHeight: 1.6 }}>
-                                We combine cutting-edge OCR technology with neural machine translation, specifically tuned for legal lexicons. Crucially, every translation is verified by our network of forensic linguists, ensuring 100% accountability.
-                            </p>
-                        </div>
-                        <div>
-                            <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--primary-color)', marginBottom: '1.5rem', fontFamily: 'Poppins, sans-serif' }}>Precision Meets Accountability</h2>
-                            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                                    <CheckCircle size={24} color="var(--success-color)" style={{ marginTop: '0.25rem' }} />
-                                    <div>
-                                        <strong style={{ display: 'block', fontSize: '1.125rem', marginBottom: '0.25rem' }}>Forensic Linguistic Analysis</strong>
-                                        <span style={{ color: '#64748b' }}>Deep contextual understanding of legal terminology across vernaculars.</span>
-                                    </div>
-                                </li>
-                                <li style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-                                    <CheckCircle size={24} color="var(--success-color)" style={{ marginTop: '0.25rem' }} />
-                                    <div>
-                                        <strong style={{ display: 'block', fontSize: '1.125rem', marginBottom: '0.25rem' }}>Human-in-the-loop Verification</strong>
-                                        <span style={{ color: '#64748b' }}>Expert linguists review and validate AI outputs for guaranteed accuracy.</span>
-                                    </div>
-                                </li>
-                            </ul>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Features Section */}
-            <section id="features" style={{ padding: '6rem 2rem', backgroundColor: 'white' }}>
-                <div className="container">
-                    <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-                        <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--primary-color)', marginBottom: '1rem', fontFamily: 'Poppins, sans-serif' }}>Platform Features</h2>
-                        <p style={{ color: '#64748b', fontSize: '1.125rem' }}>Designed for legal professionals and translation experts.</p>
+            {/* Problem Section */}
+            <section id="problem" className="lp-problem py-20 md:py-32">
+                <div className="lp-container">
+                    <div className="lp-section-header">
+                        <h2 className="lp-section-title">The Multilingual Legal Challenge</h2>
+                        <p className="lp-section-subtitle">
+                            India's legal system operates across multiple languages, creating a complex landscape where precision and cultural sensitivity are paramount. Yet, current translation approaches fail to meet the demands of legal accountability.
+                        </p>
                     </div>
 
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
-                        {/* Feature 1 */}
-                        <div className="card" style={{ padding: '2.5rem', border: '1px solid #e2e8f0', boxShadow: 'none', transition: 'box-shadow 0.3s', borderRadius: '1rem' }}>
-                            <div style={{ width: '56px', height: '56px', backgroundColor: '#eff6ff', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', color: 'var(--primary-color)' }}>
-                                <FileText size={28} />
+                    <div className="lp-grid-3">
+                        <div className="lp-card">
+                            <div className="lp-card-icon">
+                                <Globe size={24} />
                             </div>
-                            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1rem', color: '#0f172a' }}>Document Management</h3>
-                            <p style={{ color: '#64748b', lineHeight: 1.6 }}>
-                                Securely upload, organize, and track the translation status of case files in a centralized, role-based dashboard.
+                            <h3 className="lp-card-title">Linguistic Complexity</h3>
+                            <p className="lp-card-text">
+                                22 official languages in India. Complex sentence structure of legal language makes legal translation challenging. Generic AI tools fail to capture legal nuance across these languages.
                             </p>
                         </div>
 
-                        {/* Feature 2 */}
-                        <div className="card" style={{ padding: '2.5rem', border: '1px solid #e2e8f0', boxShadow: 'none', transition: 'box-shadow 0.3s', borderRadius: '1rem' }}>
-                            <div style={{ width: '56px', height: '56px', backgroundColor: '#fffbeb', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', color: 'var(--accent-color)' }}>
-                                <Globe size={28} />
+                        <div className="lp-card">
+                            <div className="lp-card-icon">
+                                <Zap size={24} />
                             </div>
-                            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1rem', color: '#0f172a' }}>Indic Language Support</h3>
-                            <p style={{ color: '#64748b', lineHeight: 1.6 }}>
-                                Specialized OCR and translation models optimized for complex regional scripts, starting with comprehensive Malayalam support.
+                            <h3 className="lp-card-title">Accuracy Risks</h3>
+                            <p className="lp-card-text">
+                                Inaccurate translations lead to misinterpretation, delayed justice, and legal liability. Manual processes are slow and prone to human error.
                             </p>
                         </div>
 
-                        {/* Feature 3 */}
-                        <div className="card" style={{ padding: '2.5rem', border: '1px solid #e2e8f0', boxShadow: 'none', transition: 'box-shadow 0.3s', borderRadius: '1rem' }}>
-                            <div style={{ width: '56px', height: '56px', backgroundColor: '#f0fdf4', borderRadius: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem', color: 'var(--success-color)' }}>
-                                <Shield size={28} />
+                        <div className="lp-card">
+                            <div className="lp-card-icon">
+                                <Lock size={24} />
                             </div>
-                            <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: '1rem', color: '#0f172a' }}>Verifiable Accuracy</h3>
-                            <p style={{ color: '#64748b', lineHeight: 1.6 }}>
-                                Confidence scores and detailed linguist review history are attached to every document, ensuring admissibility and trust.
+                            <h3 className="lp-card-title">Accountability Gap</h3>
+                            <p className="lp-card-text">
+                                Existing translation tools fail to provide assurance in translation accuracy. Users cannot verify why a translation was made or trust its legal validity.
                             </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Solution Section */}
+            <section id="solution" className="lp-solution py-20 md:py-32">
+                <div className="lp-container lp-grid-2">
+                    <div>
+                        <h2 className="lp-section-title" style={{ textAlign: 'left', marginBottom: '1.5rem' }}>Meet InLinguo</h2>
+                        <p className="lp-section-subtitle mb-6" style={{ textAlign: 'left' }}>
+                            AccuJuris's flagship AI-powered legal translation software, trained exclusively on Indian legal corpora including statutes, judgments, and formal legal documents.
+                        </p>
+
+                        <div className="lp-check-list">
+                            <div className="lp-check-item">
+                                <CheckCircle size={24} className="lp-check-item-icon" />
+                                <div>
+                                    <h4 className="lp-check-item-title">Legal-Domain Specific</h4>
+                                    <p className="lp-check-item-text">Trained on Indian legal documents, not generic text.</p>
+                                </div>
+                            </div>
+
+                            <div className="lp-check-item">
+                                <CheckCircle size={24} className="lp-check-item-icon" />
+                                <div>
+                                    <h4 className="lp-check-item-title">Terminology Consistency</h4>
+                                    <p className="lp-check-item-text">Maintains legal terminology across all documents.</p>
+                                </div>
+                            </div>
+
+                            <div className="lp-check-item">
+                                <CheckCircle size={24} className="lp-check-item-icon" />
+                                <div>
+                                    <h4 className="lp-check-item-title">Explainable Outputs</h4>
+                                    <p className="lp-check-item-text">Forensic linguistics backing for every translation decision.</p>
+                                </div>
+                            </div>
+
+                            <div className="lp-check-item">
+                                <CheckCircle size={24} className="lp-check-item-icon" />
+                                <div>
+                                    <h4 className="lp-check-item-title">Strict Data Privacy</h4>
+                                    <p className="lp-check-item-text">GDPR-aligned, SOC2 compliant data handling.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <Link to="/login" className="lp-btn lp-btn-lg lp-btn-accent">
+                            Explore InLinguo <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
+                        </Link>
+                    </div>
+
+                    <div className="lp-visual-box">
+                        <div className="lp-visual-inner">
+                            <div>
+                                <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔄</div>
+                                <p className="lp-visual-text">
+                                    Input → AI Processing → Legal Expert Review → Linguistic Expert Review → Verified Output
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Workflow Section */}
+            <section id="features" className="py-20 md:py-32" style={{ backgroundColor: 'var(--lp-bg)' }}>
+                <div className="lp-container">
+                    <h2 className="lp-section-title text-center mb-16">The AccuJuris Workflow</h2>
+
+                    <div className="lp-workflow-grid">
+                        {[
+                            { step: "1", title: "Upload", description: "Submit legal documents (judgments, petitions, statutes)" },
+                            { step: "2", title: "AI Processing", description: "InLinguo engine translates using legal-specific models" },
+                            { step: "3", title: "Legal Expert Review", description: "Expert advocates verify legal accuracy and compliance" },
+                            { step: "4", title: "Linguistic Expert Review", description: "Forensic linguists verify translation precision and variation" },
+                            { step: "5", title: "Verified Output", description: "Accountable and accurate legally translated documents" },
+                        ].map((item, idx) => (
+                            <div key={idx} className="lp-step">
+                                <div className="lp-step-card">
+                                    <div className="lp-step-circle">{item.step}</div>
+                                    <h3 className="lp-step-title">{item.title}</h3>
+                                    <p className="lp-step-text">{item.description}</p>
+                                </div>
+                                {idx < 4 && (
+                                    <div className="lp-step-arrow">
+                                        <ArrowRight size={24} />
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Target Users Section */}
+            <section className="lp-users py-20 md:py-32">
+                <div className="lp-container">
+                    <h2 className="lp-section-title text-center mb-16">Who We Serve</h2>
+
+                    <div className="lp-grid-3">
+                        {[
+                            { icon: "⚖️", title: "Advocates", desc: "Speed up case preparation across languages" },
+                            { icon: "👥", title: "Civilians", desc: "Understand legal proceedings in native tongue" },
+                            { icon: "📝", title: "Legal Translators", desc: "Enhance productivity with AI-assisted tools" },
+                            { icon: "🏢", title: "Law Firms", desc: "Standardize translation quality across departments" },
+                            { icon: "🏛️", title: "Government", desc: "Ensure accurate dissemination of laws" },
+                            { icon: "🔬", title: "Researchers", desc: "Access Indian legal history across languages" },
+                        ].map((user, idx) => (
+                            <div key={idx} className="lp-user-card">
+                                <div className="lp-user-icon">{user.icon}</div>
+                                <h3 className="lp-card-title">{user.title}</h3>
+                                <p className="lp-card-text">{user.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Technology Section */}
+            <section className="py-20 md:py-32" style={{ backgroundColor: 'var(--lp-bg)' }}>
+                <div className="lp-container">
+                    <div style={{ maxWidth: '48rem', margin: '0 auto' }}>
+                        <h2 className="lp-section-title text-center mb-8">Built on Trust & Technology</h2>
+
+                        <div className="lp-grid-2" style={{ gap: '3rem' }}>
+                            <div>
+                                <h3 className="lp-card-title">Technology Foundation</h3>
+                                <p className="lp-card-text">
+                                    Built on state-of-the-art NLP models fine-tuned specifically for the Indian legal context. Our infrastructure ensures reliability, scalability, and performance.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 className="lp-card-title">Corpus Training</h3>
+                                <p className="lp-card-text">
+                                    Exclusive access to diverse Indian legal datasets including statutes, judgments, and formal legal documents across multiple languages.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 className="lp-card-title">Forensic Linguistics</h3>
+                                <p className="lp-card-text">
+                                    Every translation is backed by forensic linguistics principles, ensuring accountability and legal validity at every step.
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 className="lp-card-title">Compliance & Security</h3>
+                                <p className="lp-card-text">
+                                    GDPR-aligned, SOC2 compliant data handling. Your sensitive legal documents are protected with enterprise-grade security.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
             {/* About Section */}
-            <section id="about" style={{ padding: '6rem 2rem', backgroundColor: 'var(--surface-color)' }}>
-                <div className="container">
-                    <h2 style={{ textAlign: 'center', fontSize: '2.5rem', fontWeight: 800, color: 'var(--primary-color)', marginBottom: '4rem', fontFamily: 'Poppins, sans-serif' }}>About AccuJuris</h2>
-
-                    {/* Mission & Vision Cards */}
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem', marginBottom: '4rem' }}>
-                        <div style={{ backgroundColor: 'white', padding: '3rem', borderRadius: '1.5rem', boxShadow: 'var(--shadow)', border: '1px solid var(--border-color)' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                                <div style={{ backgroundColor: '#eff6ff', padding: '0.75rem', borderRadius: '0.75rem' }}>
-                                    <Globe size={24} color="var(--primary-color)" />
-                                </div>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--primary-color)', margin: 0 }}>Our Vision</h3>
-                            </div>
-                            <p style={{ color: '#475569', lineHeight: 1.7, fontSize: '1.05rem' }}>
-                                To break down language barriers in the Indian judicial system, ensuring that justice is never delayed or denied due to linguistic misunderstandings, and creating a seamless, transparent bridge between vernacular records and court proceedings.
-                            </p>
-                        </div>
-
-                        <div style={{ backgroundColor: 'white', padding: '3rem', borderRadius: '1.5rem', boxShadow: 'var(--shadow)', border: '1px solid var(--border-color)' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                                <div style={{ backgroundColor: '#fffbeb', padding: '0.75rem', borderRadius: '0.75rem' }}>
-                                    <CheckCircle size={24} color="var(--accent-color)" />
-                                </div>
-                                <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--primary-color)', margin: 0 }}>Our Mission</h3>
-                            </div>
-                            <p style={{ color: '#475569', lineHeight: 1.7, fontSize: '1.05rem' }}>
-                                By combining advanced AI translation technologies with rigorous forensic linguistic verification, we aim to provide law firms, courts, and individuals with the most accurate, reliable, and legally accountable document translations available.
-                            </p>
-                        </div>
+            <section id="about" className="lp-about py-20 md:py-32">
+                <div className="lp-container">
+                    <div className="lp-section-header" style={{ marginBottom: '2rem' }}>
+                        <h2 className="lp-section-title">About AccuJuris</h2>
                     </div>
 
-                    {/* Leadership */}
-                    <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-                        <h3 style={{ fontSize: '1.75rem', fontWeight: 700, color: 'var(--text-color)', marginBottom: '2rem' }}>Leadership</h3>
+                    <div style={{ maxWidth: '48rem', margin: '0 auto' }}>
+                        <div className="lp-about-card">
+                            <h3 className="lp-about-title">Our Vision</h3>
+                            <p className="lp-about-text">
+                                Access to justice for every Indian, regardless of language. We believe that linguistic barriers should never impede access to the legal system.
+                            </p>
+                        </div>
 
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', backgroundColor: 'white', padding: '3rem', borderRadius: '1.5rem', boxShadow: 'var(--shadow)', border: '1px solid var(--border-color)' }}>
-                            <div style={{
-                                width: '100px',
-                                height: '100px',
-                                backgroundColor: 'var(--primary-color)',
-                                color: 'white',
-                                borderRadius: '50%',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontSize: '2.5rem',
-                                fontWeight: 800,
-                                marginBottom: '1.5rem'
-                            }}>
-                                G
-                            </div>
-                            <h4 style={{ fontSize: '1.5rem', fontWeight: 700, margin: '0 0 0.5rem 0', color: 'var(--text-color)' }}>Gouri V B</h4>
-                            <p style={{ color: 'var(--accent-color)', fontWeight: 600, margin: '0 0 1.5rem 0' }}>Founder & CEO</p>
-                            <p style={{ color: '#64748b', lineHeight: 1.7, maxWidth: '600px' }}>
-                                A passionate forensic linguist and legal tech innovator, Gouri recognized the critical gap in accurate vernacular-to-English translations in Indian courts. She leads AccuJuris with a commitment to linguistic precision and accountability.
+                        <div className="lp-about-card">
+                            <h3 className="lp-about-title">Our Mission</h3>
+                            <p className="lp-about-text">
+                                To provide the gold standard in legal translation through forensic linguistics, ensuring accountability, accuracy, and accessibility.
+                            </p>
+                        </div>
+
+                        <div className="lp-about-card text-center">
+                            <h3 className="lp-about-title mb-8">Leadership</h3>
+                            <div className="lp-avatar">G</div>
+                            <h4 style={{ fontSize: '1.25rem', color: 'var(--lp-primary)', marginBottom: '0.5rem' }}>Gouri V B</h4>
+                            <p style={{ color: 'var(--lp-text-muted)', marginBottom: '0.5rem' }}>Founder & CEO</p>
+                            <p style={{ fontSize: '0.875rem', color: 'var(--lp-text-muted)' }}>
+                                Leading AccuJuris's mission to revolutionize legal translation in India through forensic linguistics and AI.
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Footer */}
-            <footer style={{ backgroundColor: 'var(--primary-color)', color: '#cbd5e1', padding: '4rem 2rem 2rem' }}>
-                <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            {/* CTA Section */}
+            <section className="lp-cta py-20 md:py-32">
+                <div className="lp-container">
+                    <h2 className="lp-cta-title">Ready to Transform Legal Translation?</h2>
+                    <p className="lp-cta-text">
+                        Join advocates, law firms, and government departments who trust AccuJuris for accurate, accountable legal translation.
+                    </p>
 
-                    <div style={{ display: 'flex', gap: '2rem', marginBottom: '3rem' }}>
-                        <a href="#" style={{ color: 'white', textDecoration: 'none', fontWeight: 500, ':hover': { textDecoration: 'underline' } }}>Privacy Policy</a>
-                        <a href="#" style={{ color: 'white', textDecoration: 'none', fontWeight: 500, ':hover': { textDecoration: 'underline' } }}>Terms of Service</a>
-                        <a href="#" style={{ color: 'white', textDecoration: 'none', fontWeight: 500, ':hover': { textDecoration: 'underline' } }}>Contact</a>
+                    <div className="lp-hero-actions" style={{ justifyContent: 'center' }}>
+                        <Link to="/login" className="lp-btn lp-btn-lg lp-btn-accent">
+                            Try Demo <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
+                        </Link>
+                        <a href="#contact" className="lp-btn lp-btn-lg lp-btn-outline-inverse">
+                            Request Access
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            {/* Contact Section */}
+            <section id="contact" className="py-20 md:py-32" style={{ backgroundColor: 'var(--lp-bg)' }}>
+                <div className="lp-container text-center">
+                    <h2 className="lp-section-title mb-8">Get in Touch</h2>
+
+                    <div className="lp-card" style={{ maxWidth: '42rem', margin: '0 auto' }}>
+                        <p className="lp-card-text mb-6 text-center">
+                            Have questions? We'd love to hear from you. Reach out to our team.
+                        </p>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+                            <div>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--lp-text-muted)', marginBottom: '0.25rem' }}>Email</p>
+                                <a href="mailto:ceoaccujuris@gmail.com" style={{ fontSize: '1.125rem', fontWeight: 600, color: 'var(--lp-accent-hover)' }}>
+                                    ceoaccujuris@gmail.com
+                                </a>
+                            </div>
+
+                            <div>
+                                <p style={{ fontSize: '0.875rem', color: 'var(--lp-text-muted)', marginBottom: '0.25rem' }}>LinkedIn</p>
+                                <a href="https://www.linkedin.com/in/gourivb" target="_blank" rel="noopener noreferrer" style={{ fontSize: '1.125rem', fontWeight: 600, color: 'var(--lp-accent-hover)' }}>
+                                    Connect with us on LinkedIn
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="lp-footer">
+                <div className="lp-container">
+                    <div className="lp-footer-grid">
+                        <div>
+                            <div className="lp-logo mb-4">
+                                <div className="lp-logo-icon" style={{ backgroundColor: 'var(--lp-accent)', color: 'var(--lp-primary)' }}>A</div>
+                                <span className="lp-logo-text" style={{ color: 'white' }}>AccuJuris</span>
+                            </div>
+                            <p style={{ fontSize: '0.875rem', color: 'rgba(255, 255, 255, 0.7)' }}>
+                                Forensic linguistics-driven legal translation for India.
+                            </p>
+                        </div>
+
+                        <div>
+                            <h4 className="lp-footer-title">Product</h4>
+                            <ul className="lp-footer-links">
+                                <li><a href="#solution">InLinguo</a></li>
+                                <li><a href="#features">Features</a></li>
+                                <li><a href="#">Pricing</a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 className="lp-footer-title">Company</h4>
+                            <ul className="lp-footer-links">
+                                <li><a href="#about">About</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Security</a></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 className="lp-footer-title">Legal</h4>
+                            <ul className="lp-footer-links">
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">Terms of Service</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                            </ul>
+                        </div>
                     </div>
 
-                    <div style={{ width: '100%', height: '1px', backgroundColor: 'rgba(255,255,255,0.1)', marginBottom: '2rem' }}></div>
-
-                    <p style={{ textAlign: 'center', fontSize: '0.875rem' }}>
-                        &copy; {new Date().getFullYear()} AccuJuris. All rights reserved. Accountability Assured Legal Translation.
-                    </p>
+                    <div className="lp-footer-bottom">
+                        <p>© {new Date().getFullYear()} AccuJuris. All rights reserved. Accountability Assured Legal Translation.</p>
+                    </div>
                 </div>
             </footer>
-
         </div>
     );
-};
-
-export default LandingPage;
+}
