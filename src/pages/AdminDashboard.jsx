@@ -22,6 +22,7 @@ const AdminDashboard = () => {
         email: '',
         role: 'user',
         is_approved: true,
+        is_permanent: false,
         password: '',
     });
 
@@ -76,6 +77,7 @@ const AdminDashboard = () => {
             email: user.email,
             role: user.role,
             is_approved: user.is_approved,
+            is_permanent: user.is_permanent || false,
             password: '',
         });
         setMessage(null);
@@ -83,7 +85,7 @@ const AdminDashboard = () => {
 
     const cancelEdit = () => {
         setEditingId(null);
-        setEditForm({ name: '', email: '', role: 'user', is_approved: true, password: '' });
+        setEditForm({ name: '', email: '', role: 'user', is_approved: true, is_permanent: false, password: '' });
     };
 
     const handleUpdateUser = async (userId) => {
@@ -94,6 +96,7 @@ const AdminDashboard = () => {
                 email: editForm.email,
                 role: editForm.role,
                 is_approved: editForm.is_approved,
+                is_permanent: editForm.is_permanent,
             };
             if (editForm.password) {
                 payload.password = editForm.password;
@@ -248,6 +251,7 @@ const AdminDashboard = () => {
                                             <th style={{ textAlign: 'left', padding: '0.65rem 0.5rem' }}>Email</th>
                                             <th style={{ textAlign: 'left', padding: '0.65rem 0.5rem' }}>Role</th>
                                             <th style={{ textAlign: 'left', padding: '0.65rem 0.5rem' }}>Approved</th>
+                                            <th style={{ textAlign: 'left', padding: '0.65rem 0.5rem' }}>Permanent</th>
                                             <th style={{ textAlign: 'left', padding: '0.65rem 0.5rem' }}>Actions</th>
                                         </tr>
                                     </thead>
@@ -296,6 +300,21 @@ const AdminDashboard = () => {
                                                             onChange={(e) => setEditForm({ ...editForm, is_approved: e.target.checked })}
                                                         />
                                                     ) : (user.is_approved ? 'Yes' : 'No')}
+                                                </td>
+                                                <td style={{ padding: '0.65rem 0.5rem', minWidth: '120px' }}>
+                                                    {editingId === user.id ? (
+                                                        <input
+                                                            type="checkbox"
+                                                            checked={editForm.is_permanent}
+                                                            onChange={(e) => setEditForm({ ...editForm, is_permanent: e.target.checked })}
+                                                        />
+                                                    ) : (
+                                                        user.is_permanent ? (
+                                                            <span style={{ color: '#22c55e', fontWeight: 600 }}>✓ Yes</span>
+                                                        ) : (
+                                                            <span style={{ color: 'var(--text-secondary)' }}>{user.free_submissions_left ?? 0} trials</span>
+                                                        )
+                                                    )}
                                                 </td>
                                                 <td style={{ padding: '0.65rem 0.5rem', minWidth: '280px' }}>
                                                     {editingId === user.id ? (

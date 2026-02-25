@@ -36,7 +36,7 @@ export default function LandingPage() {
                             Login
                         </Link>
                         <Link to="/login" className="lp-btn lp-btn-sm lp-btn-accent">
-                            Try Demo
+                            Login
                         </Link>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ export default function LandingPage() {
 
                         <div className="lp-hero-actions">
                             <Link to="/login" className="lp-btn lp-btn-lg lp-btn-accent">
-                                Try Demo <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
+                                Login <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
                             </Link>
                             <a href="#contact" className="lp-btn lp-btn-lg lp-btn-outline-inverse">
                                 Request Access
@@ -319,7 +319,7 @@ export default function LandingPage() {
 
                     <div className="lp-hero-actions" style={{ justifyContent: 'center' }}>
                         <Link to="/login" className="lp-btn lp-btn-lg lp-btn-accent">
-                            Try Demo <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
+                            Login <ArrowRight size={20} style={{ marginLeft: '0.5rem' }} />
                         </Link>
                         <a href="#contact" className="lp-btn lp-btn-lg lp-btn-outline-inverse">
                             Request Access

@@ -178,13 +178,6 @@ const VerificationInterface = () => {
     /* ── submit ── */
 
     const handleSubmit = async () => {
-        if (reviewerRole === 'linguist' && (!notes || !notes.trim())) {
-            alert('Linguistic Experts must provide notes for the end user before submitting.');
-            setActiveTab('edit');
-            setNotesOpen(true);
-            return;
-        }
-
         setSubmitting(true);
         try {
             await api.post(`/api/gig/verify/${id}`, {
@@ -309,7 +302,7 @@ const VerificationInterface = () => {
                                         rows="3"
                                         value={notes}
                                         onChange={(e) => setNotes(e.target.value)}
-                                        placeholder={reviewerRole === 'linguist' ? "Required: Add notes for the end user and translator..." : "Add reviewer notes for your collaborator..."}
+                                        placeholder="Add optional notes for the end user or collaborator..."
                                     />
 
                                     {/* Collaborator Notes Display */}

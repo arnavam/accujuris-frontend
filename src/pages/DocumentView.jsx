@@ -64,17 +64,8 @@ const DocumentView = () => {
     const isSubmitterLocked = user?.role === 'submitter' && document.payment_required && !document.submitter_paid;
     const canPayUnlock = Boolean((document.linguist_comment || '').trim());
 
-    const loadRazorpayScript = () => new Promise((resolve) => {
-        if (window.Razorpay) {
-            resolve(true);
-            return;
-        }
-        const script = window.document.createElement('script');
-        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-        script.onload = () => resolve(true);
-        script.onerror = () => resolve(false);
-        window.document.body.appendChild(script);
-    });
+
+
 
     const markUnlockPaid = async (paymentId) => {
         await api.post(`/api/documents/${id}/unlock`, {
@@ -87,35 +78,13 @@ const DocumentView = () => {
     const handleDemoPayment = async () => {
         setPaying(true);
         try {
-            const loaded = await loadRazorpayScript();
-            if (!loaded || !window.Razorpay) {
-                const ok = window.confirm('Razorpay demo is unavailable. Simulate successful demo payment?');
-                if (ok) {
-                    await markUnlockPaid(`demo_${Date.now()}`);
-                }
-                return;
+            const ok = window.confirm(
+                'Demo Payment: ₹99 for unlocking the full translated document.\n\nClick OK to simulate a successful payment.'
+            );
+            if (ok) {
+                await markUnlockPaid(`demo_${Date.now()}`);
+                alert('Demo payment successful! Full document unlocked.');
             }
-            const options = {
-                key: 'rzp_test_1DP5mmOlF5G5ag',
-                amount: 9900,
-                currency: 'INR',
-                name: 'AccuJuris Demo',
-                description: 'Unlock full translated document',
-                handler: async (response) => {
-                    await markUnlockPaid(response?.razorpay_payment_id);
-                    alert('Demo payment successful. Full document unlocked.');
-                },
-                modal: {
-                    ondismiss: () => { },
-                },
-                prefill: {
-                    name: user?.name || '',
-                    email: user?.email || '',
-                },
-                theme: { color: '#2563eb' },
-            };
-            const paymentObject = new window.Razorpay(options);
-            paymentObject.open();
         } catch (err) {
             console.error('Payment failed', err);
             alert('Payment failed. Please try again.');
@@ -214,7 +183,7 @@ const DocumentView = () => {
                                             Step 1: Linguist Feedback
                                         </div>
                                         <div style={{ color: '#7c2d12', fontSize: '0.92rem' }}>
-                                            Accuracy: <strong>{(document.linguist_accuracy ?? scorePercent(document.confidence_score)).toFixed(1)}%</strong>
+                                            Accuracy: <strong>{document.linguist_accuracy != null ? `${document.linguist_accuracy.toFixed(1)}%` : 'Pending review'}</strong>
                                         </div>
                                         <div style={{ color: '#7c2d12', fontSize: '0.92rem', marginTop: '0.35rem' }}>
                                             Linguist Verdict: <strong>{document.linguist_verdict ? 'Looks accurate' : 'Needs correction / pending'}</strong>
@@ -248,18 +217,7 @@ const DocumentView = () => {
                             )}
                         </div>
 
-                        {versions.length > 0 && (
-                            <div style={{ marginTop: '1rem', borderTop: '1px solid var(--border-color)', paddingTop: '0.75rem' }}>
-                                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.4rem' }}>Version History</div>
-                                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
-                                    {versions.slice(0, 8).map((v) => (
-                                        <span key={v.id} style={{ fontSize: '0.75rem', backgroundColor: '#eef2ff', color: '#3730a3', padding: '0.2rem 0.45rem', borderRadius: '999px' }}>
-                                            v{v.version} • {v.source}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
+                        {/* Version history removed as per user request */}
 
                         {scorePercent(document.confidence_score) < 60 && !document.fully_verified && (
                             <div style={{ marginTop: '1rem', padding: '0.75rem', backgroundColor: '#fff7ed', border: '1px solid #fed7aa', borderRadius: '0.375rem', color: '#c2410c', fontSize: '0.875rem', display: 'flex', gap: '0.5rem' }}>
