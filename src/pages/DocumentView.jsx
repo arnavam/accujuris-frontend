@@ -180,10 +180,10 @@ const DocumentView = () => {
                                 <div style={{ display: 'grid', gap: '0.9rem' }}>
                                     <div className="card" style={{ backgroundColor: '#fff7ed', borderColor: '#fed7aa' }}>
                                         <div style={{ fontWeight: 600, color: '#9a3412', marginBottom: '0.4rem' }}>
-                                            Step 1: Linguist Feedback
+                                            Linguist Feedback
                                         </div>
                                         <div style={{ color: '#7c2d12', fontSize: '0.92rem' }}>
-                                            Accuracy: <strong>{document.linguist_accuracy != null ? `${document.linguist_accuracy.toFixed(1)}%` : 'Pending review'}</strong>
+                                            Accuracy: <strong>{document.translation_accuracy != null ? `${document.translation_accuracy.toFixed(1)}%` : 'Pending review'}</strong>
                                         </div>
                                         <div style={{ color: '#7c2d12', fontSize: '0.92rem', marginTop: '0.35rem' }}>
                                             Linguist Verdict: <strong>{document.linguist_verdict ? 'Looks accurate' : 'Needs correction / pending'}</strong>
@@ -195,11 +195,11 @@ const DocumentView = () => {
 
                                     <div className="card" style={{ border: '1px dashed var(--border-color)' }}>
                                         <div style={{ fontWeight: 600, marginBottom: '0.4rem' }}>
-                                            Step 2: Unlock Full Document
+                                            Unlock Full Document
                                         </div>
                                         <div style={{ color: 'var(--text-secondary)', marginBottom: '0.75rem', fontSize: '0.92rem' }}>
                                             {canPayUnlock
-                                                ? 'Continue with demo Razorpay payment to access the full translated document.'
+                                                ? 'Complete demo payment to access the full translated document.'
                                                 : 'Payment unlock will be enabled after linguist comments are submitted.'}
                                         </div>
                                         <button
@@ -208,12 +208,51 @@ const DocumentView = () => {
                                             onClick={handleDemoPayment}
                                             disabled={paying || !canPayUnlock}
                                         >
-                                            {paying ? 'Opening Razorpay...' : 'Pay with Razorpay (Demo)'}
+                                            {paying ? 'Processing...' : 'Pay ₹99 (Demo)'}
                                         </button>
                                     </div>
                                 </div>
                             ) : (
-                                document.translated_text || <span style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>Translation pending...</span>
+                                <>
+                                    {/* Linguist feedback for trial/unlocked users */}
+                                    {user?.role === 'submitter' && (
+                                        <div className="card" style={{
+                                            backgroundColor: document.linguist_comment ? '#f0fdf4' : '#f8fafc',
+                                            borderColor: document.linguist_comment ? '#bbf7d0' : 'var(--border-color)',
+                                            marginBottom: '1rem',
+                                            whiteSpace: 'normal',
+                                        }}>
+                                            <div style={{ fontWeight: 600, marginBottom: '0.5rem', color: document.linguist_comment ? '#166534' : 'var(--text-secondary)', fontSize: '0.9rem' }}>
+                                                Linguist Review
+                                            </div>
+                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', fontSize: '0.85rem', marginBottom: '0.5rem' }}>
+                                                <div>
+                                                    <span style={{ color: 'var(--text-secondary)' }}>Accuracy: </span>
+                                                    <strong style={{ color: document.translation_accuracy > 90 ? 'var(--success-color)' : document.translation_accuracy > 70 ? '#f59e0b' : 'var(--error-color)' }}>
+                                                        {document.translation_accuracy != null ? `${document.translation_accuracy.toFixed(1)}%` : 'Pending'}
+                                                    </strong>
+                                                </div>
+                                                <div>
+                                                    <span style={{ color: 'var(--text-secondary)' }}>Verdict: </span>
+                                                    <strong style={{ color: document.linguist_approved ? 'var(--success-color)' : '#f59e0b' }}>
+                                                        {document.linguist_approved ? '✓ Approved' : document.linguist_verdict === false ? 'Needs correction' : 'Pending'}
+                                                    </strong>
+                                                </div>
+                                            </div>
+                                            {document.linguist_comment && (
+                                                <div style={{ fontSize: '0.88rem', color: '#334155', borderTop: '1px solid var(--border-color)', paddingTop: '0.5rem', whiteSpace: 'pre-wrap' }}>
+                                                    <strong>Expert Comments:</strong> {document.linguist_comment}
+                                                </div>
+                                            )}
+                                            {!document.linguist_comment && (
+                                                <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>
+                                                    Linguist review is pending. You will see feedback here once reviewed.
+                                                </div>
+                                            )}
+                                        </div>
+                                    )}
+                                    {document.translated_text || <span style={{ color: 'var(--text-secondary)', fontStyle: 'italic' }}>Translation pending...</span>}
+                                </>
                             )}
                         </div>
 

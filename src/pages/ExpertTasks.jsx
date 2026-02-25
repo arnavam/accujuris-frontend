@@ -106,12 +106,12 @@ const ExpertTasks = () => {
                                 <div style={{ display: 'grid', gap: '0.35rem', fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
                                     <div>
                                         Linguist: <strong style={{ color: task.linguist_approved ? 'var(--success-color)' : task.linguist_reviewed ? '#f59e0b' : 'var(--text-color)' }}>
-                                            {task.assigned_linguist_name || 'Unassigned'} {task.linguist_approved ? '(approved)' : task.linguist_reviewed ? '(reviewed)' : '(pending)'}
+                                            {task.assigned_linguist_name === user?.name ? 'You' : (task.assigned_linguist_name || 'Unassigned')} {task.linguist_approved ? '(approved)' : task.linguist_reviewed ? '(reviewed)' : '(pending)'}
                                         </strong>
                                     </div>
                                     <div>
                                         Translator: <strong style={{ color: task.translator_approved ? 'var(--success-color)' : task.translator_reviewed ? '#f59e0b' : 'var(--text-color)' }}>
-                                            {task.assigned_translator_name || 'Unassigned'} {task.translator_approved ? '(approved)' : task.translator_reviewed ? '(reviewed)' : '(pending)'}
+                                            {task.assigned_translator_name === user?.name ? 'You' : (task.assigned_translator_name || 'Unassigned')} {task.translator_approved ? '(approved)' : task.translator_reviewed ? '(reviewed)' : '(pending)'}
                                         </strong>
                                     </div>
                                     {task.fully_verified && (

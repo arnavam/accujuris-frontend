@@ -44,7 +44,7 @@ const Dashboard = () => {
             if (targetFilters.min_confidence !== '') params.min_confidence = Number(targetFilters.min_confidence);
             if (targetFilters.max_confidence !== '') params.max_confidence = Number(targetFilters.max_confidence);
 
-            const response = await api.get('/api/documents', { params });
+            const response = await api.get('/api/documents/', { params });
             setDocuments(response.data.items || []);
             setTotal(response.data.total || 0);
             setPage(response.data.page || targetPage);

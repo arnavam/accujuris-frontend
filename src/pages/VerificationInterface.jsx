@@ -4,7 +4,7 @@ import api from '../api/axios';
 import Navbar from '../components/Navbar';
 import {
     ArrowLeft, Save, Check, X, AlertTriangle,
-    Upload, Download, Users, MessageSquare, Pencil, Eye,
+    Users, MessageSquare, Pencil, Eye,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { diff_match_patch as DiffMatchPatch } from 'diff-match-patch';
@@ -60,39 +60,7 @@ const VerificationInterface = () => {
     const ocrDisplayText = useMemo(() => normalizeDisplayText(task?.ocr_text), [task?.ocr_text]);
     const ocrHasMalayalam = useMemo(() => hasMalayalam(ocrDisplayText), [ocrDisplayText]);
 
-    /* ── file actions ── */
 
-    const handleDownloadTranslation = () => {
-        const text = corrections || task?.translated_text || '';
-        const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `${task.original_filename.replace(/\.[^/.]+$/, '')}_working_translation.txt`;
-        a.click();
-        URL.revokeObjectURL(url);
-    };
-
-    const handleUploadCorrectedFile = async (e) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-        if (file.name.toLowerCase().endsWith('.docx')) {
-            alert('DOCX parsing is not supported in-browser yet. Please upload TXT/MD/CSV.');
-            e.target.value = '';
-            return;
-        }
-        try {
-            const text = await file.text();
-            setCorrections(text);
-            setIsCorrect(false);
-            dirtyRef.current = true;
-        } catch (error) {
-            console.error('Failed to read corrected file', error);
-            alert('Failed to read corrected file.');
-        } finally {
-            e.target.value = '';
-        }
-    };
 
     /* ── data fetching ── */
 
@@ -262,18 +230,6 @@ const VerificationInterface = () => {
                             <>
                                 {/* Toolbar */}
                                 <div className="vi-toolbar">
-                                    <button className="vi-toolbar-btn" type="button" onClick={handleDownloadTranslation}>
-                                        <Download size={13} /> Download
-                                    </button>
-                                    <label className="vi-toolbar-btn" style={{ cursor: 'pointer' }}>
-                                        <Upload size={13} /> Upload
-                                        <input
-                                            type="file"
-                                            accept=".txt,.md,.csv,.docx"
-                                            style={{ display: 'none' }}
-                                            onChange={handleUploadCorrectedFile}
-                                        />
-                                    </label>
                                     <div className="vi-toolbar-spacer" />
                                     <button
                                         className={`vi-toolbar-btn ${notesOpen ? 'vi-toolbar-btn--active' : ''}`}
