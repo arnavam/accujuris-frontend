@@ -13,6 +13,15 @@ const Navbar = () => {
     const [toast, setToast] = useState('');
     const prevUnreadRef = useRef(0);
 
+    const roleConfig = {
+        submitter: { label: 'User', bg: '#dbeafe', color: '#1e40af' },
+        user: { label: 'User', bg: '#dbeafe', color: '#1e40af' },
+        admin: { label: 'Admin', bg: '#fee2e2', color: '#991b1b' },
+        expert: { label: 'Expert', bg: '#ede9fe', color: '#5b21b6' },
+        linguist: { label: 'Linguist', bg: '#d1fae5', color: '#065f46' },
+        translator: { label: 'Translator', bg: '#fef3c7', color: '#92400e' },
+    };
+
     const handleLogout = async () => {
         await logout();
         navigate('/login');
@@ -136,8 +145,8 @@ const Navbar = () => {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)' }}>
                             <User size={18} />
                             <span style={{ fontWeight: 500 }}>{user.name}</span>
-                            <span style={{ fontSize: '0.75rem', backgroundColor: '#e2e8f0', padding: '0.1rem 0.4rem', borderRadius: '4px' }}>
-                                {user.role}
+                            <span style={{ fontSize: '0.75rem', backgroundColor: (roleConfig[user.role] || { bg: '#e2e8f0' }).bg, color: (roleConfig[user.role] || { color: '#475569' }).color, padding: '0.1rem 0.4rem', borderRadius: '4px', fontWeight: 600 }}>
+                                {(roleConfig[user.role] || { label: user.role }).label}
                             </span>
                         </div>
                     )}

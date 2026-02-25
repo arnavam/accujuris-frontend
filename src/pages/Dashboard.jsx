@@ -207,7 +207,14 @@ const Dashboard = () => {
 
                 {user?.role === 'submitter' && (
                     <div className="card" style={{ marginBottom: '1rem' }}>
-                        <h3 style={{ marginTop: 0, marginBottom: '0.5rem' }}>Submitter Translation</h3>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+                            <h3 style={{ margin: 0 }}>Submitter Translation</h3>
+                            {(user?.free_submissions_left || 0) > 0 && (
+                                <span style={{ fontSize: '0.8rem', fontWeight: 600, color: '#059669', backgroundColor: '#ecfdf5', padding: '0.2rem 0.5rem', borderRadius: '4px' }}>
+                                    {user.free_submissions_left} trial{user.free_submissions_left !== 1 ? 's' : ''} remaining
+                                </span>
+                            )}
+                        </div>
                         <div className="form-group" style={{ marginBottom: '0.5rem' }}>
                             <textarea
                                 className="form-input"
